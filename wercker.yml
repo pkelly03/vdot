@@ -19,7 +19,7 @@ build:
 deploy:
   steps:
   - add-to-known_hosts:
-        hostname: 107.170.140.133
+     hostname: 107.170.140.133
    - mktemp:
       envvar: PRIVATEKEY_PATH
    - create-file:
