@@ -17,22 +17,22 @@ build:
           echo "npm version $(npm -v) running"
 
 deploy:
-  steps:
-  - add-to-known_hosts:
-     hostname: 107.170.140.133
-   - mktemp:
-      envvar: PRIVATEKEY_PATH
-   - create-file:
-      name: write key
-      filename: $PRIVATEKEY_PATH
-      content: $VDOT_PRIVATE
-      overwrite: true
-      hide-from-log: true
-   - script:
-      name: transfer application
-      code: |
-        pwd
-        ls -la
-        scp -i $PRIVATEKEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=no digitalocean-test root@107.170.140.133:/opt/vdot
-   - grunt:
-      tasks: default
+    steps:
+        - add-to-known_hosts:
+            hostname: 107.170.140.133
+        - mktemp:
+            envvar: PRIVATEKEY_PATH
+        - create-file:
+            name: write key
+            filename: $PRIVATEKEY_PATH
+            content: $VDOT_PRIVATE
+            overwrite: true
+            hide-from-log: true
+        - script:
+            name: transfer application
+            code: |
+                pwd
+                ls -la
+                scp -i $PRIVATEKEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=no digitalocean-test root@107.170.140.133:/opt/vdot
+        - grunt:
+            tasks: default
